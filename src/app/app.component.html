@@ -1,20 +1,159 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCAyNTAgMjUwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyNTAgMjUwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDojREQwMDMxO30NCgkuc3Qxe2ZpbGw6I0MzMDAyRjt9DQoJLnN0MntmaWxsOiNGRkZGRkY7fQ0KPC9zdHlsZT4NCjxnPg0KCTxwb2x5Z29uIGNsYXNzPSJzdDAiIHBvaW50cz0iMTI1LDMwIDEyNSwzMCAxMjUsMzAgMzEuOSw2My4yIDQ2LjEsMTg2LjMgMTI1LDIzMCAxMjUsMjMwIDEyNSwyMzAgMjAzLjksMTg2LjMgMjE4LjEsNjMuMiAJIi8+DQoJPHBvbHlnb24gY2xhc3M9InN0MSIgcG9pbnRzPSIxMjUsMzAgMTI1LDUyLjIgMTI1LDUyLjEgMTI1LDE1My40IDEyNSwxNTMuNCAxMjUsMjMwIDEyNSwyMzAgMjAzLjksMTg2LjMgMjE4LjEsNjMuMiAxMjUsMzAgCSIvPg0KCTxwYXRoIGNsYXNzPSJzdDIiIGQ9Ik0xMjUsNTIuMUw2Ni44LDE4Mi42aDBoMjEuN2gwbDExLjctMjkuMmg0OS40bDExLjcsMjkuMmgwaDIxLjdoMEwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMQ0KCQlMMTI1LDUyLjF6IE0xNDIsMTM1LjRIMTA4bDE3LTQwLjlMMTQyLDEzNS40eiIvPg0KPC9nPg0KPC9zdmc+DQo=">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="https://blog.angular.io//">Angular blog</a></h2>
-  </li>
-</ul>
+<div>
 
+    <h2>IndiaMerch Category</h2>
+    <h5>No undo operation. If you create something by mistake, keep a note and move on</h5>
+</div>
+<!-- <div class="btn-group" dropdown>
+            <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+                          Category <span class="caret"></span>
+                        </button>
+            <ul *dropdownMenu class="dropdown-menu" role="menu">
+                <li role="menuitem" *ngFor="let item of category | async">
+                    <a class="dropdown-item" href="#">{{item.$key}}</a>
+                </li>
+            </ul>
+        </div> -->
+<h4>Category</h4>
+<md-select placeholder="Category" [(ngModel)]="selectedCategory" (change)="getSub()">
+    <md-option *ngFor="let item of category | async" [value]="item.$key">
+        {{ item.$key }}
+    </md-option>
+</md-select>
+<md-input-container>
+    <input mdInput [(ngModel)]="newCategory" placeholder="New Cateogry" value="">
+</md-input-container>
+<button md-raised-button (click)="addCategory()">Add Cateogry</button>
+
+
+<h4>Sub Category</h4>
+<md-select placeholder="Sub Category" [(ngModel)]="selectedSUB" (change)="getType()" name="subC">
+    <md-option *ngFor="let item of subCategory | async" [value]="item.$key">
+        {{ item.$key }}
+    </md-option>
+</md-select>
+<md-input-container>
+    <input mdInput [(ngModel)]="newSubCategory" placeholder="New Sub Cateogry" value="">
+</md-input-container>
+<button md-raised-button (click)="addSubCategory()">Add Sub Cateogry</button>
+
+<h4>item Type</h4>
+<md-select placeholder="Type" [(ngModel)]="selectedType" (change)="getItem()" name="subType">
+    <md-option *ngFor="let item of itemTypes | async" [value]="item.$key">
+        {{ item.$key }}
+    </md-option>
+</md-select>
+<md-input-container>
+    <input mdInput [(ngModel)]="newItemType" placeholder="New Type" value="">
+</md-input-container>
+<button md-raised-button (click)="addType()">Add Item Type</button>
+
+
+<h4>Item</h4>
+
+<md-select placeholder="Item" [(ngModel)]="selectedItem" name="subitem">
+    <md-option *ngFor="let item of itemList | async" [value]="item.$key">
+        {{ item.$key }}
+    </md-option>
+</md-select>
+<md-input-container>
+    <input mdInput [(ngModel)]="newItem" placeholder="New Item" value="">
+</md-input-container>
+<button md-raised-button (click)="addItem()">Add Item</button>
+
+
+<!-- <select class="form-control" [(ngModel)]="selectedCategory" (change)="getSub($event)">
+            <option>Select</option>
+            <option value="{{item.$key}}" *ngFor="let item of category | async">
+                {{item.$key}}
+            </option>
+        </select> -->
+<!-- <button class="btn btn-primary">Get Sub Category</button> -->
+<!-- <select class="form-control">
+            <option value="{{item.$key}}" *ngFor="let item of subCategory | async">
+                {{item.$key}}
+            </option>
+        </select> -->
+
+
+
+<!-- <ul>
+    <li class="text" *ngFor="let item of category | async">
+        {{item | json}}
+    </li>
+</ul> -->
+
+<!-- <input type="text" (keyup)="search($event)" [(ngModel)]="keyword">
+    <div *ngFor="let category of categories">
+        {{category}}
+    </div>
+
+    <ul>
+        <li class="text" *ngFor="let item of items | async">
+            {{item | json}} - {{item.cateogry}}
+        </li>
+    </ul>
+
+    <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          Dropdown
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+        </ul>
+    </div>
+
+
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown button
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+    </div>
+
+
+    <input auto-complete [(ngModel)]="myData" [source]="dataSource.bind(this)" /> -->
+
+
+<!-- <md-card>
+    <md-card-content>
+        <h2 class="example-h2">Checkbox configuration</h2>
+
+        <section class="example-section">
+            <md-checkbox class="example-margin" [(ngModel)]="checked">Checked</md-checkbox>
+            <md-checkbox class="example-margin" [(ngModel)]="indeterminate">Indeterminate</md-checkbox>
+        </section>
+
+        <section class="example-section">
+            <label class="example-margin">Align:</label>
+            <md-radio-group [(ngModel)]="align">
+                <md-radio-button class="example-margin" value="start">Start</md-radio-button>
+                <md-radio-button class="example-margin" value="end">End</md-radio-button>
+            </md-radio-group>
+        </section>
+
+        <section class="example-section">
+            <md-checkbox class="example-margin" [(ngModel)]="disabled">Disabled</md-checkbox>
+        </section>
+    </md-card-content>
+</md-card>
+
+<md-card class="result">
+    <md-card-content>
+        <h2 class="example-h2">Result</h2>
+
+        <section class="example-section">
+            <md-checkbox class="example-margin" [checked]="checked" [indeterminate]="indeterminate" [align]="align" [disabled]="disabled">
+                I'm a checkbox
+            </md-checkbox>
+        </section>
+    </md-card-content>
+</md-card> -->
